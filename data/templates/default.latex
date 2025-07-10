@@ -36,9 +36,9 @@ $endif$
     pdflicenseurl={http://creativecommons.org/licenses/by/4.0/},
 $if(colorlinks)$
     colorlinks=true,
-    linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
-    citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
-    urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+    linkcolor=$if(linkcolor)$$linkcolor$$else$linky$endif$,
+    citecolor=$if(citecolor)$$citecolor$$else$linky$endif$,
+    urlcolor=$if(urlcolor)$$urlcolor$$else$linky$endif$,
 $else$
     pdfborder={0 0 0},
 $endif$
@@ -152,7 +152,7 @@ $endif$
 \fancyhead[R]{}
 \renewcommand{\footrulewidth}{0.25pt}
 
-\fancyfoot[L]{\parbox[t]{0.98\headwidth}{\footnotesize{\sffamily $self-citation$}.}}
+\fancyfoot[L]{\parbox[t]{0.98\headwidth}{\footnotesize{\sffamily $for(authors)$$authors.name$$sep$; $endfor$ ($date$). $title$}}}
 
 
 \fancyfoot[R]{\sffamily \thepage}
@@ -163,7 +163,7 @@ $endif$
 
 % --- Macros ---------
 
-\definecolor{linky}{rgb}{0.0, 0.5, 1.0}
+\definecolor{linky}{rgb}{0.035, 0.494, 0.455}
 
 \newtcolorbox{repobox}
    {colback=red, colframe=red!75!black,
@@ -322,12 +322,6 @@ $endif$
 $if(tables)$
 \usepackage{longtable,booktabs,array}
 $endif$
-$-- add watermark and linenumbers unless this is the final (non-draft) version
-$if(draft)$
-\usepackage{lineno}
-\linenumbers
-\usepackage{draftwatermark}
-$endif$
 
 $if(graphics)$
 \usepackage{graphicx,grffile}
@@ -458,53 +452,7 @@ $endif$
   %\hrule
   \sffamily\small
 
-  {\bfseries DOI:} \href{https://doi.org/$article.doi$}{\color{linky}{$article.doi$}}
-
-  \vspace{2mm}
-  $if(retraction)$
-  $-- Retraction notices don't show Software info
-  $else$
-  {\bfseries Software}
-  \begin{itemize}
-    \setlength\itemsep{0em}
-    \item \href{$software_review_url$}{\color{linky}{Review}} \ExternalLink
-    \item \href{$software_repository_url$}{\color{linky}{Repository}} \ExternalLink
-    \item \href{https://doi.org/$archive_doi$}{\color{linky}{Archive}} \ExternalLink
-  \end{itemize}
-
-  \vspace{2mm}
-  $endif$
-
-$if(joss)$
-  $if(retraction)$
-  $-- Retraction notices don't show Editor/Reviewers info
-  $else$
-  \par\noindent\hrulefill\par
-
-  \vspace{2mm}
-
-  {\bfseries Editor:} \href{$editor.url$}{$editor.name$} \ExternalLink
-  $if(editor.orcid)$\,\orcidlink{${editor.orcid}}$endif$ \\
-  \vspace{1mm}
-  $if(reviewers)$
-  {\bfseries Reviewers:}
-  \begin{itemize}
-  \setlength\itemsep{0em}
-  $for(reviewers)$
-  \item \href{https://github.com/$reviewers$}{@$reviewers$}
-  $endfor$
-  \end{itemize}
-  $endif$
-  \vspace{2mm}
-  $endif$
-$endif$
-
-  $if(retraction)$
-  $-- Retraction notices don't have submission date
-  $else$
-  {\bfseries Submitted:} $submitted$\\
-  $endif$
-  {\bfseries Published:} $published$
+  {\bfseries Date:} $date$
 
   \vspace{2mm}
   {\bfseries License}\\

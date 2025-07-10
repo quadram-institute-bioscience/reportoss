@@ -1,6 +1,7 @@
 \definecolor[lightblue]  [c=.66, m=.39, y=0,   k=0]
 \definecolor[grey]       [c=.40, m=.31, y=.32, k=.10]
 \definecolor[orcidgreen] [x=A6CE39]
+\definecolor[linky]      [x=097E74]
 
 \usemodule[tikz]
 
@@ -27,7 +28,7 @@ $if(keywords)$
   keyword={$for(keywords)$$keywords$$sep$; $endfor$},
 $endif$
   style=$linkstyle$,
-  color=$linkcolor$,
+  color=linky,
   contrastcolor=$linkcontrastcolor$]
 
 % make chapter, section bookmarks visible when opening document
@@ -104,9 +105,10 @@ $endif$
     align=normal,
     width=max
   ]
-    \tfx\setupinterlinespace $self-citation/nowrap$
+    \tfx\setupinterlinespace $for(authors)$$authors.name$$sep$; $endfor$ ($date$). $title$
   \stopframed
 \stopsetups
+
 
 \startsetups[journalLogo]
   \startframed[frame=off,width=max,align=flushright]
@@ -421,36 +423,8 @@ $endif$
 
   \setupinteraction[color=grey]
   \startalignment[flushright,nothyphenated]%
-  \useURL[articledoi][https://doi.org/$article.doi$][][$article.doi$]
-  \useURL[review][$software_review_url$][][Review]
-  \useURL[repo][$software_repository_url$][][Repository]
-  \useURL[archive][https://doi.org/$archive_doi$][][Archive]
-  \useURL[editor][$editor.url$][][$editor.name$]
 
-  {DOI}\\\from[articledoi]
-  \blank[big]
-
-  {Software}\\\color[grey]{\from[review]\,\|\,\from[repo]\,\|\,\from[archive]}
-  \blank[big]
-
-  {Editor}\\ \from[editor]
-  \blank[big]
-
-  {Reviewers}\\
-$for(reviewers)$
-  \useURL[$it$][https://github.com/$it$][][@$it$]
-  \from[$it$]
-$sep$\\
-$endfor$
-  \blank[big]
-
-  {Submitted}\\ \color[grey]{$submitted$}
-  \blank[big]
-
-  {Published}\\\color[grey]{$published$}
-  \blank[big]
-
-  {License}\\\color[grey]{$license$}
+  {Date}\\ \color[grey]{$date$}
 
 \stopalignment
 }
