@@ -1,5 +1,8 @@
 # inara
 
+> This is a fork to generate reports at QIB
+> Original repository: [inara](https://github.com/openjournals/inara)
+
 Tools to create Open Journals publishing artifacts.
 
 The package is designed to be usable either via its Makefile, or
