@@ -20,7 +20,7 @@ set -- $args
 set -e
 
 outformats=jats,pdf
-draft=true
+draft=false
 retraction=
 log=
 article_info_file=
